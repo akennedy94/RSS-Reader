@@ -19,26 +19,26 @@ The server will run on localhost:3005
 Back end:
 -----------
 
-  Axios
+	Axios
   
-  NeDB
+	NeDB
   
-  Express
+	Express
   
-  React-Router
+	React-Router
   
-  rss-parser
+	rss-parser
   
   
   
 Front end:
 -----------
 
-  React
+	React
   
-  React-Toastify
+	React-Toastify
   
-  Bulma
+	Bulma
 
 
 This app was bootstrapped with Create React App!
