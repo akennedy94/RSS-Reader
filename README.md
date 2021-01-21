@@ -17,16 +17,25 @@ The server will start on localhost:3005
 
 # Info
 
-Backend:
+Back end:
+
   Axios
+  
   NeDB
+  
   Express
+  
   React-Router
+  
   rss-parser
   
-Frontend:
+  
+Front end:
+
   React
+  
   React-Toastify
+  
   Bulma
 
 This app was bootstrapped with Create React App!
