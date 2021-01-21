@@ -5,7 +5,6 @@ This is a simple app to organize podcast RSS feeds on a desktop! Oftentimes if y
 # Installation
 
 In root:
------------
 
 npm install
 
@@ -18,6 +17,7 @@ The server will start on localhost:3005
 # Info
 
 Back end:
+-----------
 
   Axios
   
@@ -30,12 +30,15 @@ Back end:
   rss-parser
   
   
+  
 Front end:
+-----------
 
   React
   
   React-Toastify
   
   Bulma
+
 
 This app was bootstrapped with Create React App!
