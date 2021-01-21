@@ -13,8 +13,6 @@ npm install
 
 npm start
 
------------
-
 The server will start and run on localhost:3005
 
 # Info
