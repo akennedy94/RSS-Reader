@@ -8,9 +8,9 @@ There are a few example podcasts that come already in the database, but you can 
 
 In root:
 
-npm install
+  npm install
 
-npm start
+  npm start
 
 The server will run on localhost:3005
 
