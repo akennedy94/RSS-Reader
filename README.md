@@ -7,7 +7,6 @@ There are a few example podcasts that come already in the database, but you can 
 # Installation
 
 In root:
-----------
 
 npm install
 
@@ -18,7 +17,6 @@ The server will run on localhost:3005
 # Info
 
 Back end:
------------
 
   Axios
   
