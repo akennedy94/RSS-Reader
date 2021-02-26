@@ -51,4 +51,9 @@ h3 {
 }
 
 .disabled {pointer-events: none}
-  
+
+@media(max-width: 750px) {
+    .button {
+        max-width: -webkit-fill-available;
+    }
+}
