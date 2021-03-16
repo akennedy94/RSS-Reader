@@ -25,8 +25,6 @@ Back end:
   
 	Express
   
-	React-Router
-  
 	rss-parser
   
   
@@ -40,5 +38,6 @@ Front end:
   
 	Bulma
 
+	React-Router
 
 This app was bootstrapped with Create React App!
