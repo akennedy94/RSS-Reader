@@ -13,7 +13,13 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
 
   // validate link
   const checkURL = (URL) => {
-    return validUrl.isHttpsUri(URL);
+    if (
+      URL.substring(0, 7) !== "http://" &&
+      URL.substring(0, 8) !== "https://"
+    ) {
+      URL = "https://" + URL;
+    }
+    return validUrl.isHttpUri(URL) === undefined;
   };
 
   const clickToastSuccess = () =>

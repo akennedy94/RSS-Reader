@@ -85,13 +85,17 @@ const PodcastSeries = (props) => {
   return (
     <div className="pod-box column is-quarter mt-4">
       <Link
-        to={{
-          pathname: `podcast/${props.id}`,
-          props: {
-            detailedData: detailedData,
-            handleDelete: handleDelete,
-          },
-        }}
+        to={
+          detailedData !== null
+            ? {
+                pathname: `podcast/${props.id}`,
+                props: {
+                  detailedData: detailedData,
+                  handleDelete: handleDelete,
+                },
+              }
+            : ""
+        }
       >
         <button
           className={
