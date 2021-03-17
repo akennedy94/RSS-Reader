@@ -52,6 +52,20 @@ h3 {
 
 .disabled {pointer-events: none}
 
+.card-size {
+    max-width: 360px;
+}
+
+.card {
+    background-color: #212121;
+    color: #E4E6EB;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
 @media(max-width: 750px) {
     .button {
         max-width: -webkit-fill-available;
