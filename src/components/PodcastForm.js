@@ -8,7 +8,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
   const [title, setTitle] = useState(null);
   const [link, setLink] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState({title: false, link: false});
+  const [error, setError] = useState({ title: false, link: false });
   const validUrl = require("valid-url");
 
   // validate link
@@ -37,21 +37,21 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    const errorChecker = {...error};
-    setError({title: false, link: false});
+    const errorChecker = { ...error };
+    setError({ title: false, link: false });
 
     if (!checkURL(link.trim()) && !title) {
       clickToastFail("Please fill out both fields!");
       setSubmitted(false);
       errorChecker.title = true;
       errorChecker.link = true;
-      setError(errorChecker)
+      setError(errorChecker);
       return;
     } else if (!checkURL(link.trim())) {
       clickToastFail("Please enter a valid link!");
       setSubmitted(false);
       errorChecker.link = true;
-      setError(errorChecker)
+      setError(errorChecker);
       return;
     } else if (!title) {
       clickToastFail("Please enter a title!");
@@ -113,7 +113,9 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
             <div className="field">
               <div className="control">
                 <button
-                  className={submitted ? "button is-loading disabled" : "button form"}
+                  className={
+                    submitted ? "button is-loading disabled" : "button form"
+                  }
                   id="formSub"
                   onClick={(e) => handleSubmit(e)}
                 >

@@ -93,7 +93,12 @@ const PodcastSeries = (props) => {
           },
         }}
       >
-        <button className={detailedData !== null ? "button" : "Disabled button is-loading"} id={props.id} >
+        <button
+          className={
+            detailedData !== null ? "button" : "Disabled button is-loading"
+          }
+          id={props.id}
+        >
           {props.title}
         </button>
       </Link>
