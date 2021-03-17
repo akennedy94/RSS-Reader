@@ -15,8 +15,8 @@ const DisplayPodcastSeries = ({ podcasts, setPodcasts }) => {
 
     return (
         <div className="mt-6">
-            <div>
-                <h3>Podcast Feeds</h3>
+            <div className="flex-center">
+                {podcasts.length === 0 ?  <EmptyCard /> : <h3>Podcast Feeds</h3>}
             </div>
             <div id="hidden" className="active columns is-multiline px-2">
                 { podcasts.map(podcast => {
@@ -90,5 +90,18 @@ const PodcastSeries = (props) => {
       </div>
     )
   }
+
+const EmptyCard = () => {
+  return (
+    <div className="card card-size">
+      <div className="card-content ">
+        <div className="content">
+          {`You haven't added any podcast feeds yet! \n
+          When you do, they'll show up here!`}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default DisplayPodcastSeries;
