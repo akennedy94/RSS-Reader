@@ -41,7 +41,6 @@ const PodcastSeries = (props) => {
     const remove = await axios
       .delete("/delete", { data: { id: props.id } })
       .then((response) => {
-        console.log(response);
         if (response.status) {
           props.updateLocal(props.id);
           clickToastSuccess();
@@ -71,16 +70,10 @@ const PodcastSeries = (props) => {
     });
 
   async function getDetailedInfo(link) {
-    const podButton = document.getElementById(props.id);
-
     const podDeets = await axios
       .post("/podcastFeed", { link: link })
       .then((response) => {
         setDetailedData(response.data);
-      })
-      .then(() => {
-        podButton.classList.remove("is-loading");
-        podButton.removeAttribute("disabled");
       })
       .catch((error) => console.log(error));
   }
@@ -100,7 +93,12 @@ const PodcastSeries = (props) => {
           },
         }}
       >
-        <button className="button is-loading" id={props.id} disabled>
+        <button
+          className={
+            detailedData !== null ? "button" : "Disabled button is-loading"
+          }
+          id={props.id}
+        >
           {props.title}
         </button>
       </Link>

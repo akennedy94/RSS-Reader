@@ -7,10 +7,12 @@ import DisplayPodcastSeries from "./DisplayPodcastSeries";
 const PodcastForm = ({ podcasts, setPodContent }) => {
   const [title, setTitle] = useState(null);
   const [link, setLink] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState({ title: false, link: false });
+  const validUrl = require("valid-url");
 
   // validate link
   const checkURL = (URL) => {
-    const validUrl = require("valid-url");
     return validUrl.isHttpsUri(URL);
   };
 
@@ -34,29 +36,30 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formInputs = document.querySelectorAll("#formInput");
-    formInputs.forEach((input) => (input.style.borderColor = "#dbdbdb"));
-    const button = document.getElementById("formSub");
-
-    button.classList.add("is-loading");
+    setSubmitted(true);
+    const errorChecker = { ...error };
+    setError({ title: false, link: false });
 
     if (!checkURL(link.trim()) && !title) {
-      formInputs.forEach((input) => (input.style.borderColor = "red"));
-      clickToastFail("Please fill out the form!");
-      button.classList.remove("is-loading");
+      clickToastFail("Please fill out both fields!");
+      setSubmitted(false);
+      errorChecker.title = true;
+      errorChecker.link = true;
+      setError(errorChecker);
       return;
     } else if (!checkURL(link.trim())) {
-      formInputs[1].style.borderColor = "red";
       clickToastFail("Please enter a valid link!");
-      button.classList.remove("is-loading");
+      setSubmitted(false);
+      errorChecker.link = true;
+      setError(errorChecker);
       return;
     } else if (!title) {
-      formInputs[0].style.borderColor = "red";
       clickToastFail("Please enter a title!");
-      button.classList.remove("is-loading");
+      setSubmitted(false);
+      errorChecker.title = true;
+      setError(errorChecker);
       return;
     } else {
-      formInputs.forEach((input) => (input.style.borderColor = "#dbdbdb"));
       const newPod = {
         title: title,
         link: link.trim(),
@@ -66,14 +69,12 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
         const update = [...podcasts];
         update.push(response.data);
         setPodContent(update);
+        setSubmitted(false);
       });
-
-      formInputs.forEach((input) => (input.value = ""));
 
       setTitle("");
       setLink("");
       clickToastSuccess();
-      button.classList.remove("is-loading");
     }
   };
 
@@ -89,7 +90,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
               <label className="label is-normal form-label">Link Name</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={error.title ? "input form-error" : "input"}
                   type="text"
                   id="formInput"
                   placeholder="Ex. My Brother, My Brother, and Me"
@@ -101,7 +102,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
               <label className="label form-label">Link</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={error.link ? "input form-error" : "input"}
                   type="text"
                   id="formInput"
                   placeholder="Ex. https://yourlinkhere.com"
@@ -112,7 +113,9 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
             <div className="field">
               <div className="control">
                 <button
-                  className="button form"
+                  className={
+                    submitted ? "button is-loading disabled" : "button form"
+                  }
                   id="formSub"
                   onClick={(e) => handleSubmit(e)}
                 >
