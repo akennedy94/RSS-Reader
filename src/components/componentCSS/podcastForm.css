@@ -1,73 +1,79 @@
 .box {
-    width: 500px;
-    text-align: left;
-    background-color: #212121;
+  width: 500px;
+  text-align: left;
+  background-color: #212121;
 }
 
 h3 {
-    text-align: center;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 600;
-    font-size: 1.5rem;
-    border-bottom: solid;
-    border-color: rgba(255,255,255,.25);
-    margin-bottom: 12px;
-    color: #E4E6EB;
+  text-align: center;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-bottom: solid;
+  border-color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 12px;
+  color: #e4e6eb;
 }
 
 .form-label {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
-    color: #E4E6EB;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #e4e6eb;
 }
 
 #formInput {
-    background-color:#3D3D3D;
-    color: #E4E6EB;
-    box-shadow: inset 0 2px 2px hsla(0, 0%, 0%, 0.5);
-    border-style: none;
+  background-color: #3d3d3d;
+  color: #e4e6eb;
+  box-shadow: inset 0 2px 2px hsla(0, 0%, 0%, 0.5);
+  border-style: none;
 }
 
-#formInput::placeholder {color: rgba(255,255,255,.25)}
+#formInput::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
 
 .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button.form {
-    background-color: #212121;
-    width: 175px;
-    border-style: none;
+  background-color: #212121;
+  width: 175px;
+  border-style: none;
 }
 
-.button.form:hover {background-color: #3D3D3D}
+.button.form:hover {
+  background-color: #3d3d3d;
+}
 
 .control {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.disabled {pointer-events: none}
+.disabled {
+  pointer-events: none;
+}
 
 .card-size {
-    max-width: 360px;
+  max-width: 360px;
 }
 
 .card {
-    background-color: #212121;
-    color: #E4E6EB;
+  background-color: #212121;
+  color: #e4e6eb;
 }
 
 .flex-center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-@media(max-width: 750px) {
-    .button {
-        max-width: -webkit-fill-available;
-    }
+@media (max-width: 750px) {
+  .button {
+    max-width: -webkit-fill-available;
+  }
 }

@@ -8,36 +8,32 @@ There are a few example podcasts that come already in the database, but you can 
 
 In root:
 
-	npm install
-	
-	npm start
+    npm install
+
+    npm start
 
 The server will run on localhost:3005
 
 # Info
 
-Back end:
------------
+## Back end:
 
-	Axios
-  
-	NeDB
-  
-	Express
-  
-	rss-parser
-  
-  
-  
-Front end:
------------
+    Axios
 
-	React
-  
-	React-Toastify
-  
-	Bulma
+    NeDB
 
-	React-Router
+    Express
+
+    rss-parser
+
+## Front end:
+
+    React
+
+    React-Toastify
+
+    Bulma
+
+    React-Router
 
 This app was bootstrapped with Create React App!
