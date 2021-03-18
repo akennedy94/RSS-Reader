@@ -43,12 +43,11 @@ app.get("/podcastFeed/:id", async (req, res) => {
     .getSinglePod(id)
     .then(async (response) => {
       if (response.status) {
-        const podFeed = await getFeed(response.doc[0].link)
-          .then((response) => {
-            if (response.status) {
-              res.send(response.feed).status(200)
-            } else res.status(404)
-          })
+        const podFeed = await getFeed(response.doc[0].link).then((response) => {
+          if (response.status) {
+            res.send(response.feed).status(200);
+          } else res.status(404);
+        });
       } else res.status(404);
     })
     .catch((error) => console.log(error));

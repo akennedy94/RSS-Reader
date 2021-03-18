@@ -8,7 +8,7 @@ import { toast } from "bulma-toast";
 
 function App() {
   const [podContent, setPodContent] = useState([]);
-  
+
   const updateLocalPod = (id) => {
     const updatedProjects = podContent.filter((podcast) => podcast._id !== id);
     setPodContent(updatedProjects);
@@ -22,15 +22,15 @@ function App() {
       })
       .catch((error) => console.log(error));
   }
-  
+
   const clickToastSuccess = () =>
-  toast({
-    message: "Podcast successfully deleted!",
-    type: "is-success",
-    position: "bottom-center",
-    dismissible: true,
-    animate: { in: "fadeIn", out: "fadeOut" },
-  });
+    toast({
+      message: "Podcast successfully deleted!",
+      type: "is-success",
+      position: "bottom-center",
+      dismissible: true,
+      animate: { in: "fadeIn", out: "fadeOut" },
+    });
 
   const clickToastFail = () =>
     toast({
@@ -42,21 +42,20 @@ function App() {
     });
 
   async function handleDelete(confirm, endPoint) {
-    if(confirm){
+    if (confirm) {
       const remove = await axios
-      .delete("/delete", { data: { id: endPoint } })
-      .then((response) => {
-        if (response.status) {
-          updateLocalPod(endPoint);
-          clickToastSuccess();
-        } else {
-          clickToastFail();
-        }
-      })
-      .catch((error) => console.log(error));
+        .delete("/delete", { data: { id: endPoint } })
+        .then((response) => {
+          if (response.status) {
+            updateLocalPod(endPoint);
+            clickToastSuccess();
+          } else {
+            clickToastFail();
+          }
+        })
+        .catch((error) => console.log(error));
     }
   }
-
 
   useEffect(() => {
     getPodDatabase();
@@ -79,7 +78,11 @@ function App() {
           <Route
             exact
             path="/podcast/:podId"
-            component={(match) => {return <DetailDisplay match={match} handleDelete={handleDelete}/>}}
+            component={(match) => {
+              return (
+                <DetailDisplay match={match} handleDelete={handleDelete} />
+              );
+            }}
           />
         </Switch>
       </Router>

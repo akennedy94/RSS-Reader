@@ -68,7 +68,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
       setSubmitted(false);
 
       errorChecker.title = true;
-      
+
       setError(errorChecker);
       return;
     } else {

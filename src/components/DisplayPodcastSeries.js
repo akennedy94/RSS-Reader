@@ -6,7 +6,7 @@ const DisplayPodcastSeries = ({ podcasts, setPodcasts }) => {
     const updatedProjects = podcasts.filter((podcast) => podcast._id !== id);
     setPodcasts(updatedProjects);
   };
-  
+
   // rerender component when new podcast added
   useEffect(() => {}, [podcasts]);
 
@@ -33,19 +33,14 @@ const DisplayPodcastSeries = ({ podcasts, setPodcasts }) => {
 };
 
 const PodcastSeries = (props) => {
-    
   return (
     <div className="pod-box column is-quarter mt-4">
       <Link
         to={{
-            pathname: `podcast/${props.id}`
-          }
-        }
+          pathname: `podcast/${props.id}`,
+        }}
       >
-        <button
-          className="button"
-          id={props.id}
-        >
+        <button className="button" id={props.id}>
           {props.title}
         </button>
       </Link>
