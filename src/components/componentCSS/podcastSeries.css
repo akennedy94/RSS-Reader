@@ -165,8 +165,9 @@ li {
   align-items: center;
 }
 
-.card-width {
-  max-width: 500px;
+.card-sizing {
+  width: 200px;
+  height: 200px;
 }
 
 @media (max-width: 750px) {

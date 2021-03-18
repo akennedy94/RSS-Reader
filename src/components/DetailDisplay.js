@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
-import "./componentCSS/podcastSeries.css";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
+import "./componentCSS/podcastSeries.css";
 
 const DetailDisplay = ({ match, handleDelete }) => {
   const [search, setSearch] = useState("");
   const [selectedPod, setSelectedPod] = useState({});
   const [display, setDisplay] = useState(false);
-  const [feedData, setFeedData] = useState(null);
+  const [detailedData, setDetailedData] = useState(null);
   const [error, setError] = useState(false);
   const history = useHistory();
-  const endPoint = match.match.params.podId;
+  const endpoint = match.match.params.podId;
 
-  async function getDetailedInfo(endPoint) {
-    const podDeets = await axios
-      .get(`/podcastFeed/${endPoint}`, { id: endPoint })
+  const getAndSetPod = async () => {
+    const podFeed = await axios
+      .get(`/podcastFeed/${endpoint}`)
       .then((response) => {
-        if (!response.data.status) {
+        if (response.data.status) {
+          setDetailedData(response.data.feed);
+        } else {
           setError(true);
-          return;
         }
-        setFeedData(response.data.feed);
       })
       .catch((error) => console.log(error));
-  }
+  };
 
   // cleanup search input
   const handleSearch = (e) => {
@@ -45,26 +45,25 @@ const DetailDisplay = ({ match, handleDelete }) => {
       "Are you sure you want to delete this feed?"
     );
     if (confirm) {
-      handleDelete(confirm, endPoint);
+      handleDelete(confirm, endpoint);
       history.push("/");
     }
   };
 
   useEffect(() => {
-    getDetailedInfo(endPoint);
-  }, [endPoint]);
+    getAndSetPod();
+  }, []);
 
   // rerender component on search
   useEffect(() => {}, [search]);
 
   return (
     <React.Fragment>
-      {feedData === null ? (
+      {detailedData === null ? (
         <LoadingCard error={error} handleButtonClick={handleButtonClick} />
       ) : (
         <div>
-          <div className="title">{feedData.title}</div>
-
+          <div className="title">{detailedData.title}</div>
           <div className="columns">
             <div className="column mt-3 search">
               <div className="control">
@@ -82,14 +81,14 @@ const DetailDisplay = ({ match, handleDelete }) => {
             <div className="column is-one-third pod-image-container">
               <img
                 className="pod-Img px-5 pb-3"
-                src={feedData.image.url}
+                src={detailedData.image.url}
                 alt="pod icon"
               ></img>
             </div>
             <div className="column is-one-third list-container">
               <ul>
                 <PodFeed
-                  detailedData={feedData}
+                  detailedData={detailedData}
                   search={search}
                   select={handleDisplay}
                 />
@@ -98,7 +97,7 @@ const DetailDisplay = ({ match, handleDelete }) => {
             <div className="column is-one-third show-description">
               <div>
                 <div className="title-container">
-                  <h4 className="feed-title">{feedData.description}</h4>
+                  <h4 className="feed-title">{detailedData.description}</h4>
                 </div>
 
                 {display ? <SelectedDisplay podcast={selectedPod} /> : null}
@@ -156,41 +155,39 @@ const PodFeed = ({ detailedData, search, select }) => {
 };
 
 const LoadingCard = ({ error, handleButtonClick }) => {
-  useEffect(() => {}, [error]);
-
   return (
     <React.Fragment>
       {error ? (
-        <div className="loading-section">
-          <div className="card ">
-            <div className="card-content card-width">
-              <div className="content">
-                <p class="title is-4">
-                  Uh oh! It looks like something went wrong with loading the RSS
-                  feed
-                </p>
+        <div>
+          <div className="loading-section">
+            <div className="card">
+              <div className="title is-4">
                 <p>
-                  This error most commonly occurs when the link provided doesn't
-                  direct to an RSS feed, try double checking the link and trying
-                  again!
+                  Oh no! It looks like something went wrong loading this feed!
+                </p>
+              </div>
+              <div className="card-content">
+                <p>
+                  This typically happens if the submitted link isn't actually
+                  and RSS feed, double check the link and try again!
                 </p>
               </div>
             </div>
-            <div className="back-button">
-              <Link to="/">
-                <button className="button is-normal">Go back</button>
-              </Link>
-            </div>
-            <div className="del-button">
-              <button className="button is-danger" onClick={handleButtonClick}>
-                Delete
-              </button>
-            </div>
+          </div>
+          <div className="back-button">
+            <Link to="/">
+              <button className="button is-normal">Go back</button>
+            </Link>
+          </div>
+          <div className="del-button">
+            <button className="button is-danger" onClick={handleButtonClick}>
+              Delete
+            </button>
           </div>
         </div>
       ) : (
-        <div>
-          <div className="loading-section">
+        <div className="loading-section">
+          <div className="card">
             <button className="button is-loading"></button>
           </div>
         </div>
