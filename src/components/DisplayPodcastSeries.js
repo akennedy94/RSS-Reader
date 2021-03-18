@@ -33,55 +33,6 @@ const DisplayPodcastSeries = ({ podcasts, setPodcasts }) => {
 };
 
 const PodcastSeries = (props) => {
-<<<<<<< HEAD
-  const [detailedData, setDetailedData] = useState(null);
-  async function getDetailedInfo(link) {
-    const podDeets = await axios
-      .post("/podcastFeed", { link: link })
-      .then((response) => {
-        setDetailedData(response.data);
-      })
-      .catch((error) => console.log(error));
-  }
-
-  async function handleDelete() {
-    const remove = await axios
-      .delete("/delete", { data: { id: props.id } })
-      .then((response) => {
-        if (response.status) {
-          props.updateLocal(props.id);
-          clickToastSuccess();
-        } else {
-          clickToastFail();
-        }
-      })
-      .catch((error) => console.log(error));
-  }
-
-  const clickToastSuccess = () =>
-    toast({
-      message: "Podcast successfully deleted!",
-      type: "is-success",
-      position: "bottom-center",
-      dismissible: true,
-      animate: { in: "fadeIn", out: "fadeOut" },
-    });
-
-  const clickToastFail = () =>
-    toast({
-      message: "Something went wrong!",
-      type: "is-danger",
-      position: "center",
-      dismissible: true,
-      animate: { in: "fadeIn", out: "fadeOut" },
-    });
-
-  useEffect(() => {
-    getDetailedInfo(props.link);
-  }, []);
-
-=======
->>>>>>> e8a181b973ab437d6e1828a80f7ae81934079497
   return (
     <div className="pod-box column is-quarter mt-4">
       <Link
