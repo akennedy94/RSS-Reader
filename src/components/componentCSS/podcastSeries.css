@@ -165,6 +165,10 @@ li {
   align-items: center;
 }
 
+.card-width {
+  max-width: 500px;
+}
+
 @media (max-width: 750px) {
   #searchInput {
     width: auto;
