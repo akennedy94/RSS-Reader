@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
+import "./components/componentCSS/App.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PodcastForm from "./components/PodcastForm";
