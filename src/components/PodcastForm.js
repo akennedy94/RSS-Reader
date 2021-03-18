@@ -12,7 +12,8 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
   const validUrl = require("valid-url");
 
   // validate link
-  const checkURL = (URL) => {if (
+  const checkURL = (URL) => {
+    if (
       URL.substring(0, 7) !== "http://" &&
       URL.substring(0, 8) !== "https://"
     ) {
