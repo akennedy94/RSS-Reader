@@ -49,20 +49,26 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
     if (!checkURL(link.trim()) && !title) {
       clickToastFail("Please fill out both fields!");
       setSubmitted(false);
+
       errorChecker.title = true;
       errorChecker.link = true;
+
       setError(errorChecker);
       return;
     } else if (!checkURL(link.trim())) {
       clickToastFail("Please enter a valid link!");
       setSubmitted(false);
+
       errorChecker.link = true;
+
       setError(errorChecker);
       return;
     } else if (!title) {
       clickToastFail("Please enter a title!");
       setSubmitted(false);
+
       errorChecker.title = true;
+      
       setError(errorChecker);
       return;
     } else {
