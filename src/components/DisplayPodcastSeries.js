@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { toast } from "bulma-toast";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const DisplayPodcastSeries = ({ podcasts, setPodcasts }) => {
@@ -35,6 +33,7 @@ const DisplayPodcastSeries = ({ podcasts, setPodcasts }) => {
 };
 
 const PodcastSeries = (props) => {
+<<<<<<< HEAD
   const [detailedData, setDetailedData] = useState(null);
   async function getDetailedInfo(link) {
     const podDeets = await axios
@@ -81,27 +80,16 @@ const PodcastSeries = (props) => {
     getDetailedInfo(props.link);
   }, []);
 
+=======
+>>>>>>> e8a181b973ab437d6e1828a80f7ae81934079497
   return (
     <div className="pod-box column is-quarter mt-4">
       <Link
-        to={
-          detailedData !== null
-            ? {
-                pathname: `podcast/${props.id}`,
-                props: {
-                  link: detailedData,
-                  handleDelete: handleDelete,
-                },
-              }
-            : ""
-        }
+        to={{
+          pathname: `podcast/${props.id}`,
+        }}
       >
-        <button
-          className={
-            detailedData !== null ? "button" : "Disabled button is-loading"
-          }
-          id={props.id}
-        >
+        <button className="button" id={props.id}>
           {props.title}
         </button>
       </Link>

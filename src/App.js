@@ -1,12 +1,18 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
+import "./components/componentCSS/App.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PodcastForm from "./components/PodcastForm";
-import SinglePod from "./components/SinglePod";
+import DetailDisplay from "./components/DetailDisplay";
+import { toast } from "bulma-toast";
 
 function App() {
   const [podContent, setPodContent] = useState([]);
+
+  const updateLocalPod = (id) => {
+    const updatedProjects = podContent.filter((podcast) => podcast._id !== id);
+    setPodContent(updatedProjects);
+  };
 
   async function getPodDatabase() {
     await axios
@@ -15,6 +21,40 @@ function App() {
         setPodContent(response.data);
       })
       .catch((error) => console.log(error));
+  }
+
+  const clickToastSuccess = () =>
+    toast({
+      message: "Podcast successfully deleted!",
+      type: "is-success",
+      position: "bottom-center",
+      dismissible: true,
+      animate: { in: "fadeIn", out: "fadeOut" },
+    });
+
+  const clickToastFail = () =>
+    toast({
+      message: "Something went wrong!",
+      type: "is-danger",
+      position: "center",
+      dismissible: true,
+      animate: { in: "fadeIn", out: "fadeOut" },
+    });
+
+  async function handleDelete(confirm, endPoint) {
+    if (confirm) {
+      const remove = await axios
+        .delete("/delete", { data: { id: endPoint } })
+        .then((response) => {
+          if (response.status) {
+            updateLocalPod(endPoint);
+            clickToastSuccess();
+          } else {
+            clickToastFail();
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   }
 
   useEffect(() => {
@@ -38,8 +78,10 @@ function App() {
           <Route
             exact
             path="/podcast/:podId"
-            render={() => {
-              return <SinglePod />;
+            component={(match) => {
+              return (
+                <DetailDisplay match={match} handleDelete={handleDelete} />
+              );
             }}
           />
         </Switch>

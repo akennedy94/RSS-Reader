@@ -39,12 +39,17 @@ app.get("/podcasts", async (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.get("/podcast/:id", async (req, res) => {
-  const getSinglePod = await database
-    .getSinglePod(req.params.id)
-    .then((response) => {
+app.get("/podcastFeed/:id", async (req, res) => {
+  const id = req.params.id;
+  const getSinglePodFeed = await database
+    .getSinglePod(id)
+    .then(async (response) => {
       if (response.status) {
-        res.send(response.doc).status(200);
+        const podFeed = await getFeed(response.doc[0].link).then((response) => {
+          if (response.status) {
+            res.send(response.feed).status(200);
+          } else res.status(404);
+        });
       } else res.status(404);
     })
     .catch((error) => console.log(error));
@@ -96,7 +101,7 @@ app.delete("/delete", async (req, res) => {
 });
 
 // catch all
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
