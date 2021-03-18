@@ -19,7 +19,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
     ) {
       URL = "https://" + URL;
     }
-    return validUrl.isWebUri(URL) !== undefined;
+    return {status: validUrl.isWebUri(URL) !== undefined, url: URL};
   };
 
   const clickToastSuccess = () =>
@@ -45,8 +45,9 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
     setSubmitted(true);
     const errorChecker = { ...error };
     setError({ title: false, link: false });
+    const url = checkURL(link.trim())
 
-    if (!checkURL(link.trim()) && !title) {
+    if (!url.status && !title) {
       clickToastFail("Please fill out both fields!");
       setSubmitted(false);
 
@@ -55,7 +56,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
 
       setError(errorChecker);
       return;
-    } else if (!checkURL(link.trim())) {
+    } else if (!url.status) {
       clickToastFail("Please enter a valid link!");
       setSubmitted(false);
 
@@ -74,7 +75,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
     } else {
       const newPod = {
         title: title,
-        link: link.trim(),
+        link: url.url,
       };
 
       const savePod = axios.post("/save", newPod).then((response) => {
