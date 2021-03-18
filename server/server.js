@@ -19,7 +19,7 @@ app
 async function getFeed(URL) {
   return new Promise((resolve, reject) => {
     const feed = parser.parseURL(URL, (err, feed) => {
-      if (err) reject(err);
+      if (err) reject({status: false, err: err});
 
       if (feed) resolve({ status: true, feed: feed });
     });
@@ -45,12 +45,15 @@ app.get("/podcastFeed/:id", async (req, res) => {
       if (response.status) {
         const podFeed = await getFeed(response.doc[0].link).then((response) => {
           if (response.status) {
-            res.send(response.feed).status(200);
-          } else res.status(404);
+            res.send({status: true, feed: response.feed}).status(200);
+          } else res.send(response.status).status(404);
         });
       } else res.status(404);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error)
+      res.send({status: false}).status(404);
+    });
 });
 
 app.post("/podcastFeed", async (req, res) => {
