@@ -1,5 +1,5 @@
 const nedb = require("nedb");
-const podcastDB = new nedb();
+const podcastDB = new nedb({ filename: "podcasts.db", autoload: true });
 
 exports.saveNewPod = async function (pod) {
   return new Promise((resolve, reject) => {

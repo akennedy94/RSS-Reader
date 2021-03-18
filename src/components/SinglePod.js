@@ -2,12 +2,28 @@ import React, { useState, useEffect } from "react";
 import "./componentCSS/podcastSeries.css";
 import { Link, useHistory } from "react-router-dom";
 
-const SinglePod = ({ match }) => {
+const SinglePod = () => {
+  const history = useHistory();
+ 
+  const checkHistoryAction = () => {
+    console.log("CHECK HISTORY")
+    if(history.action === "POP") {
+      history.push("/");
+      console.log("POP")
+    }
+  }
+
+  useEffect(() => {checkHistoryAction()}, [history]);
+
   return (
-    <DetailDisplay
-      detailedData={match.location.props.detailedData}
-      handleDelete={match.location.props.handleDelete}
-    />
+    <React.Fragment>
+    { history.location.props === undefined ? <h1>Loading!</h1> :
+      <DetailDisplay
+            detailedData={history.location.props.link}
+            handleDelete={history.location.props.handleDelete}
+      />
+  }
+  </React.Fragment>
   );
 };
 
@@ -37,7 +53,7 @@ const DetailDisplay = ({ detailedData, handleDelete }) => {
       "Are you sure you want to delete this feed?"
     );
     if (confirm) {
-      handleDelete();
+      handleDelete(confirm);
       history.push("/");
     }
   };

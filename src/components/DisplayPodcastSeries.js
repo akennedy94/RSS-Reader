@@ -36,6 +36,14 @@ const DisplayPodcastSeries = ({ podcasts, setPodcasts }) => {
 
 const PodcastSeries = (props) => {
   const [detailedData, setDetailedData] = useState(null);
+  async function getDetailedInfo(link) {
+    const podDeets = await axios
+      .post("/podcastFeed", { link: link })
+      .then((response) => {
+        setDetailedData(response.data);
+      })
+      .catch((error) => console.log(error));
+  }
 
   async function handleDelete() {
     const remove = await axios
@@ -68,19 +76,10 @@ const PodcastSeries = (props) => {
       dismissible: true,
       animate: { in: "fadeIn", out: "fadeOut" },
     });
-
-  async function getDetailedInfo(link) {
-    const podDeets = await axios
-      .post("/podcastFeed", { link: link })
-      .then((response) => {
-        setDetailedData(response.data);
-      })
-      .catch((error) => console.log(error));
-  }
-
-  useEffect(() => {
-    getDetailedInfo(props.link);
-  }, []);
+    
+    useEffect(() => {
+      getDetailedInfo(props.link);
+    }, []);
 
   return (
     <div className="pod-box column is-quarter mt-4">
@@ -90,7 +89,7 @@ const PodcastSeries = (props) => {
             ? {
                 pathname: `podcast/${props.id}`,
                 props: {
-                  detailedData: detailedData,
+                  link: detailedData,
                   handleDelete: handleDelete,
                 },
               }

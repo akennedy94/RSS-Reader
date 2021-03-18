@@ -38,7 +38,9 @@ function App() {
           <Route
             exact
             path="/podcast/:podId"
-            component={(match) => <SinglePod match={match} />}
+            render={() => {
+            return <SinglePod />
+          }}
           />
         </Switch>
       </Router>
