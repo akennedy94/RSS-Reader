@@ -76,10 +76,10 @@ const PodcastSeries = (props) => {
       dismissible: true,
       animate: { in: "fadeIn", out: "fadeOut" },
     });
-    
-    useEffect(() => {
-      getDetailedInfo(props.link);
-    }, []);
+
+  useEffect(() => {
+    getDetailedInfo(props.link);
+  }, []);
 
   return (
     <div className="pod-box column is-quarter mt-4">

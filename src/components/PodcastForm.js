@@ -19,7 +19,7 @@ const PodcastForm = ({ podcasts, setPodContent }) => {
     ) {
       URL = "https://" + URL;
     }
-    return {status: validUrl.isHttpUri(URL) === undefined, url: URL};
+    return { status: validUrl.isHttpUri(URL) === undefined, url: URL };
   };
 
   const clickToastSuccess = () =>

@@ -39,8 +39,8 @@ function App() {
             exact
             path="/podcast/:podId"
             render={() => {
-            return <SinglePod />
-          }}
+              return <SinglePod />;
+            }}
           />
         </Switch>
       </Router>

@@ -19,7 +19,9 @@ app
 async function getFeed(URL) {
   return new Promise((resolve, reject) => {
     const feed = parser.parseURL(URL, (err, feed) => {
-      if (err) {reject(err);}
+      if (err) {
+        reject(err);
+      }
 
       if (feed) resolve({ status: true, feed: feed });
     });

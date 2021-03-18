@@ -4,26 +4,30 @@ import { Link, useHistory } from "react-router-dom";
 
 const SinglePod = () => {
   const history = useHistory();
- 
-  const checkHistoryAction = () => {
-    console.log("CHECK HISTORY")
-    if(history.action === "POP") {
-      history.push("/");
-      console.log("POP")
-    }
-  }
 
-  useEffect(() => {checkHistoryAction()}, [history]);
+  const checkHistoryAction = () => {
+    console.log("CHECK HISTORY");
+    if (history.action === "POP") {
+      history.push("/");
+      console.log("POP");
+    }
+  };
+
+  useEffect(() => {
+    checkHistoryAction();
+  }, [history]);
 
   return (
     <React.Fragment>
-    { history.location.props === undefined ? <h1>Loading!</h1> :
-      <DetailDisplay
-            detailedData={history.location.props.link}
-            handleDelete={history.location.props.handleDelete}
-      />
-  }
-  </React.Fragment>
+      {history.location.props === undefined ? (
+        <h1>Loading!</h1>
+      ) : (
+        <DetailDisplay
+          detailedData={history.location.props.link}
+          handleDelete={history.location.props.handleDelete}
+        />
+      )}
+    </React.Fragment>
   );
 };
 
