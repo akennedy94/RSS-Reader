@@ -4,6 +4,12 @@ This is a simple app to organize podcast RSS feeds on a desktop! Oftentimes if y
 
 There are a few example podcasts that come already in the database, but you can remove them and add your own feeds immediately!
 
+## This project is hosted on Google Cloud!
+
+You can navigate to the following link to preview the project!
+
+http://rsstrack.akennedy.info/
+
 # Installation
 
 In root:
